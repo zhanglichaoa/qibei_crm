@@ -1,0 +1,187 @@
+[ 2017-05-17T15:01:19+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+
+[ 2017-05-17T15:04:22+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+
+[ 2017-05-17T15:08:15+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+
+[ 2017-05-17T15:19:17+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+
+[ 2017-05-17T15:30:33+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+
+[ 2017-05-17T15:42:02+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+
+[ 2017-05-17T15:49:14+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+
+[ 2017-05-17T15:50:29+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+
+[ 2017-05-17T15:54:12+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+
+[ 2017-05-17T16:02:09+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+
+[ 2017-05-17T16:08:25+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+
+[ 2017-05-17T16:12:24+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+
+[ 2017-05-17T16:13:45+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+
+[ 2017-05-17T16:15:04+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+
+[ 2017-05-17T16:22:29+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+
+[ 2017-05-17T16:22:37+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Client/client_delone.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `crm_client` [ RunTime:0.0010s ]
+SQL: UPDATE `crm_client` SET `flag`='0' WHERE `id` = 16 [ RunTime:0.0000s ]
+
+[ 2017-05-17T16:36:30+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Client/client_delall.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `crm_client` [ RunTime:0.0010s ]
+NOTIC: [2] implode(): Invalid arguments passed E:\AppServ\www\Company_crm\TuringPHP\Library\Think\Db\Driver.class.php 第 567 行.
+ERR: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+
+[ 2017-05-17T16:36:31+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Client/client_delall.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `crm_client` [ RunTime:0.0010s ]
+NOTIC: [2] implode(): Invalid arguments passed E:\AppServ\www\Company_crm\TuringPHP\Library\Think\Db\Driver.class.php 第 567 行.
+ERR: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+
+[ 2017-05-17T16:36:31+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Client/client_delall.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `crm_client` [ RunTime:0.0010s ]
+NOTIC: [2] implode(): Invalid arguments passed E:\AppServ\www\Company_crm\TuringPHP\Library\Think\Db\Driver.class.php 第 567 行.
+ERR: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+
+[ 2017-05-17T16:36:31+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Client/client_delall.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `crm_client` [ RunTime:0.0010s ]
+NOTIC: [2] implode(): Invalid arguments passed E:\AppServ\www\Company_crm\TuringPHP\Library\Think\Db\Driver.class.php 第 567 行.
+ERR: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+
+[ 2017-05-17T16:36:32+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Client/client_delall.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `crm_client` [ RunTime:0.0000s ]
+NOTIC: [2] implode(): Invalid arguments passed E:\AppServ\www\Company_crm\TuringPHP\Library\Think\Db\Driver.class.php 第 567 行.
+ERR: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+
+[ 2017-05-17T16:36:32+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Client/client_delall.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `crm_client` [ RunTime:0.0010s ]
+NOTIC: [2] implode(): Invalid arguments passed E:\AppServ\www\Company_crm\TuringPHP\Library\Think\Db\Driver.class.php 第 567 行.
+ERR: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+
+[ 2017-05-17T16:36:32+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Client/client_delall.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `crm_client` [ RunTime:0.0010s ]
+NOTIC: [2] implode(): Invalid arguments passed E:\AppServ\www\Company_crm\TuringPHP\Library\Think\Db\Driver.class.php 第 567 行.
+ERR: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+
+[ 2017-05-17T16:36:32+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Client/client_delall.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `crm_client` [ RunTime:0.0010s ]
+NOTIC: [2] implode(): Invalid arguments passed E:\AppServ\www\Company_crm\TuringPHP\Library\Think\Db\Driver.class.php 第 567 行.
+ERR: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+
+[ 2017-05-17T16:36:32+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Client/client_delall.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `crm_client` [ RunTime:0.0010s ]
+NOTIC: [2] implode(): Invalid arguments passed E:\AppServ\www\Company_crm\TuringPHP\Library\Think\Db\Driver.class.php 第 567 行.
+ERR: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+
+[ 2017-05-17T16:36:35+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Client/client_delall.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `crm_client` [ RunTime:0.0010s ]
+NOTIC: [2] implode(): Invalid arguments passed E:\AppServ\www\Company_crm\TuringPHP\Library\Think\Db\Driver.class.php 第 567 行.
+ERR: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+
+[ 2017-05-17T16:36:38+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Client/client_delall.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `crm_client` [ RunTime:0.0010s ]
+NOTIC: [2] implode(): Invalid arguments passed E:\AppServ\www\Company_crm\TuringPHP\Library\Think\Db\Driver.class.php 第 567 行.
+ERR: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+
+[ 2017-05-17T16:37:31+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+
+[ 2017-05-17T16:37:42+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Client/client_delall.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `crm_client` [ RunTime:0.0010s ]
+NOTIC: [2] implode(): Invalid arguments passed E:\AppServ\www\Company_crm\TuringPHP\Library\Think\Db\Driver.class.php 第 567 行.
+ERR: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+
+[ 2017-05-17T16:37:47+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Client/client_delall.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `crm_client` [ RunTime:0.0010s ]
+NOTIC: [2] implode(): Invalid arguments passed E:\AppServ\www\Company_crm\TuringPHP\Library\Think\Db\Driver.class.php 第 567 行.
+ERR: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+
+[ 2017-05-17T16:39:01+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+
+[ 2017-05-17T16:39:08+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Client/client_delall.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+SQL: SHOW COLUMNS FROM `crm_client` [ RunTime:0.0010s ]
+SQL: UPDATE `crm_client` SET `flag`='0' WHERE `id` IN ('13','14') [ RunTime:0.0170s ]
+
+[ 2017-05-17T16:41:22+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+
+[ 2017-05-17T16:41:51+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Banji/banji_add.html
+ERR: 无法加载控制器:Banji
+
+[ 2017-05-17T16:41:52+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Banji/banji_add.html
+ERR: 无法加载控制器:Banji
+
+[ 2017-05-17T16:41:55+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Major/major_add.html
+ERR: 无法加载控制器:Major
+
+[ 2017-05-17T16:41:56+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Major/major_pvs.html
+ERR: 无法加载控制器:Major
+
+[ 2017-05-17T16:42:05+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Client/shouhou_list.html
+ERR: 非法操作:shouhou_list
+

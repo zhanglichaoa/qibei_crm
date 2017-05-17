@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>修改小组</title>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <link href="__PUBLIC__/css/mine.css" type="text/css" rel="stylesheet">
+    </head>
+
+     <body>
+       <div class="list_box">
+           <div class="header">
+               <span class="one">当前位置是：小组安排-》修改小组信息</span>
+               <span class="two"><a href="<{:U('Home/Project/item_list')}>">【返回】</a></span>
+           </div>
+           <div class="bottom">
+           <form action="__ACTION__" method="post" enctype="multipart/form-data">
+               <table class="table_2" border="1" cellspacing="0" bordercolor="#CCCCCC">
+                     <tr>
+                     <input type="hidden"  value="<{$arr['item_id']}>"  name="item_id">
+                     <input type="hidden" value="<{$p}>" name="pno">
+                    <td>小组名称</td>
+                    <td><input type="text"  name="item_name"  value="<{$arr['item_name']}>"  style="width:200px; " /></td>
+                </tr>
+                <tr>
+                    <td>小组成员</td>
+                    <td><input type="text"  name="item_chengyuan"   value="<{$arr['item_chengyuan']}>"  style="width:200px; "   /> *小组成员之间用逗号来分割开*</td>
+                </tr>
+                <tr>
+                    <td>小组负责人</td>
+                    <td><input type="text"  name="item_fzr"  value="<{$arr['item_fzr']}>"  style="width:200px; " /></td>
+                </tr>
+                <tr>
+                    <td>主要负责的内容</td>
+                    <td>
+                           <textarea name="item_content" cols="30"  rows="3">
+                                  <{$arr['item_content']}>
+                           </textarea>
+                    </td>
+                </tr>       
+                
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="修改">
+                        <input type="button" onclick="re();" value="返回">
+                    </td>
+                </tr>    
+               </table>
+               </form>
+           </div>
+       </div>
+    </body>
+<script>
+    function re(){
+    	location.href="javascript:history.go(-1)";//返回上一页
+    }
+</script>
+</html>

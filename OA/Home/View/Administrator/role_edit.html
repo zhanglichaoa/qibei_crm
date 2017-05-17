@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>修改角色</title>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <link href="__PUBLIC__/css/mine.css" type="text/css" rel="stylesheet">
+    </head>
+
+     <body>
+       <div class="list_box">
+           <div class="header">
+               <span class="one">当前位置是：角色管理-》修改角色信息</span>
+               <span class="two"><a href="<{:U('Home/Administrator/role_list')}>">【返回】</a></span>
+           </div>
+           <div class="bottom">
+           <form action="__ACTION__" method="post" enctype="multipart/form-data">
+               <table class="table_2" border="1" cellspacing="0" bordercolor="#CCCCCC">
+                     <tr>
+                     <input type="hidden" name="pno" value="<{$p}>">
+                     <input type="hidden" name="role_id"  value="<{$arr['role_id']}>">
+                    <td>角色名称</td>
+                    <td><input type="text"  name="role_name"  value="<{$arr['role_name']}>"/></td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="修改">
+                        <input type="button" onclick="re();" value="返回">
+                    </td>
+                </tr>    
+               </table>
+               </form>
+           </div>
+       </div>
+    </body>
+<script>
+    function re(){
+    	location.href="javascript:history.go(-1)";//返回上一页
+    }
+</script>
+</html>
