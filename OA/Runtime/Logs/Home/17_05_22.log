@@ -1,0 +1,53 @@
+[ 2017-05-22T09:42:17+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+
+[ 2017-05-22T09:42:55+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+
+[ 2017-05-22T09:47:01+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Auth/cedit_do.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `crm_competence` [ RunTime:0.0010s ]
+SQL: UPDATE `crm_competence` SET `sid`='0',`cname`='系统管理员',`description`='登录用户管理',`status`='0',`dtime`='2017-05-22 09:47:01' WHERE `id` = 1 [ RunTime:0.0010s ]
+
+[ 2017-05-22T09:47:22+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Auth/cedit_do.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `crm_competence` [ RunTime:0.0010s ]
+SQL: UPDATE `crm_competence` SET `sid`='0',`cname`='系统管理员2',`description`='登录用户管理',`status`='0',`dtime`='2017-05-22 09:47:22' WHERE `id` = 1 [ RunTime:0.0010s ]
+
+[ 2017-05-22T10:06:34+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Auth/cedit_do.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `crm_competence` [ RunTime:0.0010s ]
+SQL: UPDATE `crm_competence` SET `sid`='0',`cname`='系统管理员',`description`='登录用户管理',`status`='0',`dtime`='2017-05-22 10:06:34' WHERE `id` = 1 [ RunTime:0.0010s ]
+
+[ 2017-05-22T10:06:52+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Auth/cedit_do.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `crm_competence` [ RunTime:0.0010s ]
+SQL: UPDATE `crm_competence` SET `sid`='1',`cname`='添加角色',`description`='',`status`='0',`dtime`='2017-05-22 10:06:52' WHERE `id` = 3 [ RunTime:0.0010s ]
+
+[ 2017-05-22T10:07:32+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Auth/cadd_do.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003001s ]
+SQL: SHOW COLUMNS FROM `crm_competence` [ RunTime:0.0010s ]
+SQL: INSERT INTO `crm_competence` (`sid`,`cname`,`description`,`status`,`dtime`) VALUES ('16','前台售前','','0','2017-05-22 10:07:32') [ RunTime:0.0000s ]
+
+[ 2017-05-22T11:15:53+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+
+[ 2017-05-22T13:26:49+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+
+[ 2017-05-22T13:35:27+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+
+[ 2017-05-22T13:48:22+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Public/css/admin.css
+ERR: 非法操作:css
+

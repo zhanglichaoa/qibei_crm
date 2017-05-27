@@ -24,23 +24,23 @@ $(function() {
                <span class="two"><a href="<?php echo U('Home/Client/client_list');?>">【返回】</a></span>
            </div>
            <div class="bottom">
-           <form action="/Company_crm/index.php/Home/Client/client_add" method="post" enctype="multipart/form-data">
+           <form action="/Company_crm/index.php/Home/Client/client_add" method="post" enctype="multipart/form-data"  onsubmit="return checkusr();">
                <table class="table_2" border="1" cellspacing="0" bordercolor="#CCCCCC">
                 <tr>
                     <td>客户名称</td>
-                    <td><input type="text" name="xlr_name" /></td>
+                    <td><input type="text" name="xlr_name"  id="xlr_name" style="width:200px;" /></td>
                 </tr>
                 <tr>
                     <td>客户公司</td>
-                    <td><input type="text" name="companyname" /></td>
+                    <td><input type="text" name="companyname"  id="companyname"  style="width:200px;" /></td>
                 </tr>
                 <tr>
                     <td>手机</td>
-                    <td><input type="text" name="tel" /></td>
+                    <td><input type="text" name="tel"  id="tel"  style="width:200px;" /></td>
                 </tr>
                 <tr>
                     <td>邮箱</td>
-                    <td><input type="text" name="email" /></td>
+                    <td><input type="text" name="email"  id="email"  style="width:200px;" /></td>
                 </tr>
                 <tr>
                     <td>性别</td>
@@ -52,7 +52,7 @@ $(function() {
                 <tr>
                     <td>录入时间</td>
                     <td>
-                           <input type="text" name="dtime"  id="begin_time"/>
+                           <input type="text" name="dtime"  id="begin_time"  style="width:200px;" />
                     </td>
                 </tr> 
                            
@@ -70,6 +70,38 @@ $(function() {
 <script>
     function re(){
     	location.href="javascript:history.go(-1)";//返回上一页
+    }
+    function checkusr(){
+    	 var name=$("#xlr_name").val();
+	   	 var gs=$("#companyname").val();
+	   	 var tel=$("#tel").val();
+	   	 var email=$("#email").val();
+	   	 var fzr=$("#fzr").val();
+	   	 var time=$("#begin_time").val();
+	   	 if(name==""){
+	   		   alert("客户姓名不能为空");
+	   		   return false;
+	   	 }
+	   	 if(gs==""){
+		  		   alert("公司名称不能为空");
+		  		   return false;
+	 	 }
+	   	 if(tel==""){
+		  		   alert("手机不能为空");
+		  		   return false;
+	 	 }
+	   	 if(email==""){
+		  		   alert("客户邮箱不能为空");
+		  		   return false;
+	 	 }
+	   	 if(fzr==""){
+		  		   alert("客户负责人不能为空");
+		  		   return false;
+	 	 }
+	   	 if(time==""){
+		  		   alert("客户录入时间不能为空");
+		  		   return false;
+	 	 }  	 
     }
 </script>
 </html>

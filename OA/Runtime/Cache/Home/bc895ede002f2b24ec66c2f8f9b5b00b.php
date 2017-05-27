@@ -7,33 +7,33 @@
 
         <link href="/Company_crm/Public/css/mine.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="/Company_crm/Public/js/jquery-1.8.3.js"></script>
-              <style type="text/css">
-.pages a,.pages span {
-    display:inline-block;
-    padding:2px 5px;
-    margin:0 1px;
-    border:1px solid #f0f0f0;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    border-radius:3px;
-}
-.pages a,.pages li {
-    display:inline-block;
-    list-style: none;
-    text-decoration:none; color:#58A0D3;
-}
-.pages a.first,.pages a.prev,.pages a.next,.pages a.end{
-    margin:0;
-}
-.pages a:hover{
-    border-color:#50A8E6;
-}
-.pages span.current{
-    background:#50A8E6;
-    color:#FFF;
-    font-weight:700;
-    border-color:#50A8E6;
-}
+        <style type="text/css">
+					.pages a,.pages span {
+					    display:inline-block;
+					    padding:2px 5px;
+					    margin:0 1px;
+					    border:1px solid #f0f0f0;
+					    -webkit-border-radius:3px;
+					    -moz-border-radius:3px;
+					    border-radius:3px;
+					}
+					.pages a,.pages li {
+					    display:inline-block;
+					    list-style: none;
+					    text-decoration:none; color:#58A0D3;
+					}
+					.pages a.first,.pages a.prev,.pages a.next,.pages a.end{
+					    margin:0;
+					}
+					.pages a:hover{
+					    border-color:#50A8E6;
+					}
+					.pages span.current{
+					    background:#50A8E6;
+					    color:#FFF;
+					    font-weight:700;
+					    border-color:#50A8E6;
+					}
        </style>
     </head>
     <body>
@@ -44,7 +44,7 @@
            </div>
            <div class="main">
             <form action="/Company_crm/index.php/Home/Administrator/user_list" method="get" class="form">
-                   管理员名称： <input type="text" name="zhanghao" value="<?php echo ($title); ?>"  />&nbsp;        
+                   用户帐号： <input type="text" name="zhanghao" value="<?php echo ($title); ?>"  />&nbsp;        
                 <input type="submit" value="查询" />
                </form>
                
@@ -53,7 +53,8 @@
                <table class="table_1" border="1" cellspacing="0" bordercolor="#CCCCCC">
                     <tbody><tr style="font-weight: bold;" class="character">
                         <td>序号</td>
-                        <td>用户名称</td>                       
+                        <td>用户帐号</td>
+                        <td>用户姓名</td>                       
                         <td>用户密码</td>                                            
                         <td>手机</td>                      
                         <td>邮箱</td>
@@ -63,11 +64,12 @@
                     </tr>
                     <?php if(is_array($userarr)): $i = 0; $__LIST__ = $userarr;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vv): $mod = ($i % 2 );++$i;?><tr id="product1">
                         <td><?php echo ($vv['user_id']); ?><input type="checkbox" class="curid" name="ids[]" value="<?php echo ($vv['user_id']); ?>"></td>
+                        <td><?php echo ($vv['user_xingming']); ?></td>
                         <td><?php echo ($vv['user_name']); ?></td>                     
                         <td><?php echo ($vv['password']); ?></td>                      
                         <td><?php echo ($vv['mobile']); ?></td>                      
                         <td><?php echo ($vv['email']); ?></td>
-                        <td><?php echo ($vv['role_name']); ?></td>
+                        <td><?php echo ($vv['title']); ?></td>
                         <td><?php echo (date("Y-m-d H:i:s",$vv["last_time"])); ?></td>
                         <td>
 	                        <a href="/Company_crm/index.php/Home/Administrator/user_edit/p/<?php echo ($p); ?>/id/<?php echo ($vv['user_id']); ?>">修改 </a><br>

@@ -104,7 +104,7 @@
    	   if(confirm('确定删除吗？'))
    	   {
    		      $.post("<{:U('Project/process_delone')}>",{"act":"del","ids":ids},function(d){
-   		    	  alert(d.msg);
+   		    	  alert(d.info);
    		    	  location.href="<{:U('Home/Project/process_list/p/"+curp+"')}>";
    		      },"json");
    	   }
@@ -128,7 +128,7 @@
    		  }
    	 });   
    	 $.post("<{:U('Project/process_delall')}>",{"act":"delall","idstr":idstr},function(d){
-   		 alert(d.msg);
+   		 alert(d.info);
    		 location.href="<{:U('Project/process_list')}>";
    	 },"json");
     }

@@ -62,10 +62,10 @@
                         <td><?php echo ($vv['project_id']); ?><input type="checkbox" class="curid" name="ids[]" value="<?php echo ($vv['project_id']); ?>"></td>
                         <td><?php echo ($vv['project_name']); ?></td>                     
                                                            
-                        <td><?php echo (date("Y-m-d H:i:s",$vv['begin_time'])); ?></td>
-                        <td><?php echo (date("Y-m-d H:i:s",$vv["end_time"])); ?></td>
+                        <td><?php echo (date("Y-m-d",$vv['begin_time'])); ?></td>
+                        <td><?php echo (date("Y-m-d",$vv["end_time"])); ?></td>
                         <td>
-	                        <a href="/Company_crm/index.php/Home/Shouqian/products_edit/p/<?php echo ($p); ?>/id/<?php echo ($vv['project_id']); ?>">修改 </a><br>
+	                        <a href="/Company_crm/index.php/Home/Shouqian/products_edit/p/<?php echo ($p); ?>/id/<?php echo ($vv['project_id']); ?>">修改 </a>&nbsp;&nbsp;&nbsp;
 	                        <a href="javascript:delone(<?php echo ($vv['project_id']); ?>,<?php echo ($p); ?>);">删除</a><br>
                        </td>
                     </tr><?php endforeach; endif; else: echo "" ;endif; ?>
@@ -86,14 +86,13 @@
     <script>
     //单删的操作：
     function delone(ids,curp){
-   	   if(confirm('确定删除吗？'))
-   	   {
-   		      $.post("<?php echo U('Home/Shouqian/products_del');?>",{"act":"del","ids":ids},function(d){
-   		    	  alert(d.msg);
-   		    	  location.href="<?php echo U('Home/Shouqian/products_list/p/"+curp+"');?>";
-   		      },"json");
-   	   }
-   	 
+	   	   if(confirm('确定删除吗？'))
+	   	   {
+	   		      $.post("<?php echo U('Home/Shouqian/products_delone');?>",{"act":"del","ids":ids},function(d){
+	   		    	  alert(d.info);
+	   		    	  location.href="<?php echo U('Home/Shouqian/products_list/p/"+curp+"');?>";
+	   		      },"json");
+	   	   }  	 
     }
     //全选的操作
     function selAll(obj)
@@ -113,7 +112,7 @@
    		  }
    	 });   
    	 $.post("<?php echo U('Shouqian/products_delall');?>",{"act":"delall","idstr":idstr},function(d){
-   		 alert(d.msg);
+   		 alert(d.info);
    		 location.href="<?php echo U('Shouqian/products_list');?>";
    	 },"json");
     }

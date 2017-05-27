@@ -1,7 +1,8 @@
 <?php
 namespace Home\Controller;
-use Think\Controller;
-class ProjectController extends Controller
+//use Think\Controller;
+use Home\Controller\CommonController;
+class ProjectController extends CommonController
 {
 	    /*
 	     * 小组安排的列表页
@@ -9,12 +10,13 @@ class ProjectController extends Controller
 	    public function item_list()
 	    {
 	    	//实例化对象
-	    	$itemObj=M("Itemgroup");
+	    	$itemObj=D("Itemgroup");
 	    	//当前的页数
 	    	$p=isset($_GET['p'])?$_GET['p']:1;
 	    	$this->assign("p",$p);
 	    	//查询的操作
 	    	$ini=array();
+	    	$ini['status']=1;
 	    	$title=I("get.xiaozu");
 	    	if($title!=""){
 	    		    $ini['item_name']=array("like","%{$title}%");
@@ -35,9 +37,7 @@ class ProjectController extends Controller
 	    	//内容的操作：
 	    	$cont=$itemObj->where($ini)->limit($Page->firstRow.','.$Page->listRows)->select();
 	    	$this->assign("arr",$cont);
-	    	$this->assign("pagearr",$show);
-	    	
-	    	
+	    	$this->assign("pagearr",$show);	    	
 	    	$this->display();
 	    }
 	    /*
@@ -46,10 +46,16 @@ class ProjectController extends Controller
 	    public function item_add()
 	    {
 	    	   //实例化对象
-	    	   $itmeObj=M("Itemgroup");
+	    	   $itmeObj=D("Itemgroup");
 	    	   if(IS_POST)
 	    	   {
 	    	   	        $m=$itmeObj->create();
+	    	   	        //判断小组是否存在
+	    	   	        $item['item_name']=$m['item_name'];
+	    	   	        $itemarr=$itmeObj->where($item)->find();
+	    	   	        if(!empty($itemarr)){
+	    	   	        	  $this->error("该小组已经存在");
+	    	   	        }	    	   	        
 	    	   	        if($m)
 	    	   	        {   
 	    	   	        	   $n=$itmeObj->add();
@@ -61,12 +67,9 @@ class ProjectController extends Controller
 	    	   	        	   }
 	    	   	        	
 	    	   	        }else {
-	    	   	        	$this->error("数据创建失败".$itmeObj->getError());
-	    	   	        }
-	    	   	
-	    	   }
-	    	
-	    	
+	    	   	        	$this->error("数据创建失败------".$itmeObj->getError());
+	    	   	        }	    	   	
+	    	   }	    	
 	    	   $this->display();
 	    }
 	    /*
@@ -74,7 +77,7 @@ class ProjectController extends Controller
 	     */
 	      public function item_edit()
 	      {
-	      	    $itemObj=M("Itemgroup");
+	      	    $itemObj=D("Itemgroup");
 	      	    if(IS_POST)
 	      	    {
 	      	    	     //当前的页数
@@ -91,10 +94,9 @@ class ProjectController extends Controller
 	      	    	     	 }
 	      	    	     	
 	      	    	     }else {
-	      	    	        $this->error("数据创建失败".$itemObj->getError());
+	      	    	        $this->error("数据创建失败-------".$itemObj->getError());
 	      	    	     }
-	      	    }
-	      	      	    
+	      	    }	      	      	    
 	      	   //接收id和当前的页数
 	      	   $id=I("get.id");
 	      	   $p=I("get.p");
@@ -102,9 +104,7 @@ class ProjectController extends Controller
                $ini['item_id']=$id;
                $contarr=$itemObj->where($ini)->find();
                $this->assign("arr",$contarr);
-               $this->assign("p",$p);
-	      	   
-	      	   
+               $this->assign("p",$p);	      		      	   
 	      	   $this->display();
 	      }
 	    /*
@@ -112,19 +112,20 @@ class ProjectController extends Controller
 	     */
 	      public function item_delone()
 	      {
-	      	   $itemObj=M("Itemgroup");
+	      	   $itemObj=D("Itemgroup");
 	      	   //接受动作标识
 	      	  $act=isset($_POST['act'])?$_POST['act']:'';
 	      	  if($act=="del")
 	      	  {
 	      	  	     $id=I("post.ids");
 	      	  	     $ini['item_id']=$id;
-	      	  	     $n=$itemObj->where($ini)->delete();
+	      	  	     $ini['status']=0;
+	      	  	     $n=$itemObj->save($ini);
 	      	  	     if($n)
 	      	  	     {
-	      	  	     	  $arr['msg']="删除成功";
+	      	  	     	  $arr['info']="删除成功";
 	      	  	     }else{
-	      	  	     	  $arr['msg']="删除失败";
+	      	  	     	  $arr['info']="删除失败";
 	      	  	     }
 	      	  	     echo json_encode($arr);
 	      	  }
@@ -136,7 +137,7 @@ class ProjectController extends Controller
 	      public function item_delall()
 	      {
 	      	    //实例化对象
-	      	   $itemObj=M("Itemgroup");
+	      	   $itemObj=D("Itemgroup");
 	      	   //接收动作标识
 	      	   $act=isset($_POST['act'])?$_POST['act']:'';
 	      	   if($act=="delall")
@@ -144,18 +145,17 @@ class ProjectController extends Controller
 	      	   	        $ids=I("post.idstr");
 	      	   	        $id=substr($ids, 0,strlen($ids)-1);
 	      	   	        $ini['item_id']=array("in",$id);
-	      	   	        $n=$itemObj->where($ini)->delete();
+	      	   	        $ini['status']=0;
+	      	   	        $n=$itemObj->save($ini);
 	      	   	        if($n)
 	      	   	        {
-	      	   	        	   $arr['msg']="删除成功";
+	      	   	        	   $arr['info']="删除成功";
 	      	   	        }else {
-	      	   	        	   $arr['msg']="删除失败";
+	      	   	        	   $arr['info']="删除失败";
 	      	   	        }
 	      	   	        echo json_encode($arr);
-	      	   }
-	      	   
-	      	   exit();
-	      	   
+	      	   }	      	   
+	      	   exit();	      	   
 	      }
 	      /*
 	       * 工单分配列表页
@@ -163,11 +163,11 @@ class ProjectController extends Controller
 	      public function wo_list()
 	      {
 	      	     //实例化对象
-	      	     $wo=M("workorder");
+	      	     $wo=D("workorder");
 	      	     //工单的查询
 	      	     $title=I("get.gongdan");
 	      	     $ini=array();
-	      	     $ini['flag']=1;
+	      	     $ini['w.flag']=1;
 	      	     if($title!="")
 	      	     {
 	      	     	 $ini['title']=array("like","%{$title}%");	      	     	
@@ -177,7 +177,7 @@ class ProjectController extends Controller
 	      	     $p=isset($_GET['p'])?$_GET['p']:1;
 	      	     $this->assign("p",$p);     	         
 	      	     //翻页的操作
-	      	     $count=$wo->where($ini)->count();
+	      	     $count=$wo->alias("w")->where($ini)->count();
 	      	     $Page=new \Think\Page($count,2);
 	      	     //***** 分页样式定制
 	      	     $Page->setConfig('header', '<li class="rows">共<b>%TOTAL_ROW%</b>条记录&nbsp;第<b>%NOW_PAGE%</b>页/共<b>%TOTAL_PAGE%</b>页</li>');
@@ -189,7 +189,7 @@ class ProjectController extends Controller
 	      	     $Page->setConfig('theme', '%FIRST%%UP_PAGE%%LINK_PAGE%%DOWN_PAGE%%END%%HEADER%');
 	      	     $show=$Page->show();
 	      	     //内容的查询
-	      	     $cont=$wo->where($ini)->limit($Page->firstRow.','.$Page->listRows)->alias("w")->field("w.*,k.kehu_name,k.kehu_phone")->join("crm_kehu as k on w.userid=k.id ","left")->select();
+	      	     $cont=$wo->where($ini)->limit($Page->firstRow.','.$Page->listRows)->alias("w")->field("w.*,k.xlr_name,k.tel")->join("crm_client as k on w.kehu_id=k.id ","left")->select();
 	      	     $this->assign("arr",$cont);
 	      	     $this->assign("pagearr",$show);
 	      	     $this->display();
@@ -200,10 +200,16 @@ class ProjectController extends Controller
 	      public function wo_add()
 	      {
 	      	    //实例化对象
-	      	    $wo=M("workorder");
+	      	    $wo=D("workorder");
 	      	    if(IS_POST)
 	      	    {
 	      	    	    $m=$wo->create();
+	      	    	    //判断工单是否存在
+	      	    	    $gd['title']=$m['title'];
+	      	    	    $gdArr=$wo->where($gd)->find();
+	      	    	    if(!empty($gdArr)){
+	      	    	    	  $this->error("工单已经存在");
+	      	    	    }
 	      	    	    if($m)
 	      	    	    {
 	      	    	    	$m['content']=html_entity_decode($m['content']);
@@ -215,7 +221,7 @@ class ProjectController extends Controller
 	      	    	    		  $this->error("添加失败".$wo->getError());
 	      	    	    	}
 	      	    	    }else {
-	      	    	    	$this->error("数据创建失败");
+	      	    	    	$this->error("数据创建失败------".$wo->getError());
 	      	    	    }
 	      	    	
 	      	    }
@@ -227,7 +233,7 @@ class ProjectController extends Controller
 	      public function wo_edit()
 	      {
 	      	  //实例化对象  
-	      	  $woObj=M("workorder"); 
+	      	  $woObj=D("workorder"); 
 	      	  if(IS_POST){
 	      	  	    $pno=I("post.pno");
 	      	  	    $m=$woObj->create();
@@ -260,73 +266,70 @@ class ProjectController extends Controller
 	       */
 	      public function wo_delone()
 	      {
-	      	$itemObj=M("workorder");
-	      	//接受动作标识
-	      	$act=isset($_POST['act'])?$_POST['act']:'';
-	      	if($act=="del")
-	      	{
-	      		$id=I("post.ids");
-	      		$ini['id']=$id;
-	      		$ini['flag']=0;
-	      		$n=$itemObj->save($ini);
-	      		if($n)
-	      		{
-	      			$arr['msg']="删除成功";
-	      		}else{
-	      			$arr['msg']="删除失败";
-	      		}
-	      		echo json_encode($arr);
-	      	}
-	      	exit();
+		      	$itemObj=D("workorder");
+		      	//接受动作标识
+		      	$act=isset($_POST['act'])?$_POST['act']:'';
+		      	if($act=="del")
+		      	{
+			      		$id=I("post.ids");
+			      		$ini['id']=$id;
+			      		$ini['flag']=0;
+			      		$n=$itemObj->save($ini);
+			      		if($n)
+			      		{
+			      			$arr['info']="删除成功";
+			      		}else{
+			      			$arr['info']="删除失败";
+			      		}
+			      		echo json_encode($arr);
+		      	}
+	         	exit();
 	      }
 	      /*
 	       * 工单的多删
 	       */
 	      public function wo_delall()
 	      {
-	      	//实例化对象
-	      	$itemObj=M("workorder");
-	      	//接收动作标识
-	      	$act=isset($_POST['act'])?$_POST['act']:'';
-	      	if($act=="delall")
-	      	{
-	      		$ids=I("post.idstr");
-	      		$id=substr($ids, 0,strlen($ids)-1);
-	      		$ini['id']=array("in",$id);
-	      		$ini['flag']=0;
-	      		$n=$itemObj->save($ini);
-	      		if($n)
-	      		{
-	      			$arr['msg']="删除成功";
-	      		}else {
-	      			$arr['msg']="删除失败";
-	      		}
-	      		echo json_encode($arr);
-	      	}
-	      	 
-	      	exit();
-	      	 
+		      	//实例化对象
+		      	$itemObj=D("workorder");
+		      	//接收动作标识
+		      	$act=isset($_POST['act'])?$_POST['act']:'';
+		      	if($act=="delall")
+		      	{
+			      		$ids=I("post.idstr");
+			      		$id=substr($ids, 0,strlen($ids)-1);
+			      		$ini['id']=array("in",$id);
+			      		$ini['flag']=0;
+			      		$n=$itemObj->save($ini);
+			      		if($n)
+			      		{
+			      			$arr['info']="删除成功";
+			      		}else {
+			      			$arr['info']="删除失败";
+			      		}
+			      		echo json_encode($arr);
+		      	}	      	 
+	      	exit();	      	 
 	      }
 	    /*
 	     * 任务管理的列表页
 	     */  
 	      public function task_list()
 	      {
-	      	   //实例化对象	      	   
-	      	    $taskObj=M('task');	      	  
+	      	    //实例化对象	      	   
+	      	    $taskObj=D('task');	      	  
 	      	    //当前的页数
 	      	    $p=isset($_GET['p'])?$_GET['p']:1;
 	      	    $this->assign("p",$p);
 	      	     //查询的操作
 	      	     $title=I("get.rw");
 	      	     $ini=array();
+	      	     $ini['flag']=1;
 	      	     if($title !="")
 	      	     {
-	      	     	  $ini['task_name']=array("like","%{$title}%");
-	      	     	  
+	      	     	  $ini['task_name']=array("like","%{$title}%");	      	     	  
 	      	     }
-	      	    $this->assign("title",$title);
-	      	    
+	      	    $this->assign("title",$title);     	    
 	      	    //翻页的操作
 	      	    $count=$taskObj->where($ini)->count();
 	      	    $Page=new \Think\Page($count,2);
@@ -355,11 +358,17 @@ class ProjectController extends Controller
 	      public function task_add()
 	      {
 	      	  //实例化对象
-	      	  $taskObj=M("task");
-	      	  $name=M("itemgroup");
+	      	  $taskObj=D("task");
+	      	  $name=D("itemgroup");
 	      	  if(IS_POST)
 	      	  {
 	      	  	      $m=$taskObj->create();
+	      	  	      //判断任务是否已经存在了
+	      	  	      $task['task_name']=$m['task_name'];
+	      	  	      $taskarr=$taskObj->where($task)->find();
+	      	  	      if(!empty($taskarr)){
+	      	  	      	   $this->error("该任务已经存在了");
+	      	  	      }
 	      	  	      if($m)
 	      	  	      {
 	      	  	      	    $n=$taskObj->add();
@@ -370,7 +379,7 @@ class ProjectController extends Controller
 	      	  	      	    	  $this->error("数据添加失败");
 	      	  	      	    }
 	      	  	      }else {
-	      	  	      	 $this->error("数据创建失败");
+	      	  	      	 $this->error("数据创建失败------".$taskObj->getError());
 	      	  	      }
 	      	  	
 	      	  	
@@ -386,7 +395,7 @@ class ProjectController extends Controller
 	       public function task_edit()
 	       {
 	       	      //实例化对象
-	       	      $taskObj=M("task");
+	       	      $taskObj=D("task");
 	       	      //接受id和当前的页数
 	       	      $id=I("get.id");
 	       	      $p=I("get.p");
@@ -406,7 +415,7 @@ class ProjectController extends Controller
 	       	      	    	  
 	       	      	    }else {
 	       	      	    	
-	       	      	    	$this->error("数据创建失败");
+	       	      	    	$this->error("数据创建失败----".$taskObj->getError());
 	       	      	    }
 	       	      	
 	       	      }
@@ -416,7 +425,7 @@ class ProjectController extends Controller
 	       	      $ini['task_id']=$id;
 	       	      $arr=$taskObj->where($ini)->join("crm_itemgroup as i on t.fzr_id=i.item_id","left")->field("t.*,i.item_fzr")->alias("t")->find();
 	       	      //跟配给
-	       	      $itarr=M("itemgroup");
+	       	      $itarr=D("itemgroup");
 	       	      $arr2=$itarr->select();
 	       	      $this->assign("arrit",$arr2);
 	       	      
@@ -430,19 +439,20 @@ class ProjectController extends Controller
 	       */
 	       public function task_delone()
 	       {
-	       	$itemObj=M("task");
+	       	$itemObj=D("task");
 	       	//接受动作标识
 	       	$act=isset($_POST['act'])?$_POST['act']:'';
 	       	if($act=="del")
 	       	{
 	       		$id=I("post.ids");
 	       		$ini['task_id']=$id;
-	       		$n=$itemObj->where($ini)->delete();
+	       		$ini['flag']=0;
+	       		$n=$itemObj->save($ini);
 	       		if($n)
 	       		{
-	       			$arr['msg']="删除成功";
+	       			$arr['info']="删除成功";
 	       		}else{
-	       			$arr['msg']="删除失败";
+	       			$arr['info']="删除失败";
 	       		}
 	       		echo json_encode($arr);
 	       	}
@@ -454,7 +464,7 @@ class ProjectController extends Controller
 	       public function task_delall()
 	       {
 	       	//实例化对象
-	       	$itemObj=M("task");
+	       	$itemObj=D("task");
 	       	//接收动作标识
 	       	$act=isset($_POST['act'])?$_POST['act']:'';
 	       	if($act=="delall")
@@ -462,12 +472,13 @@ class ProjectController extends Controller
 	       		$ids=I("post.idstr");
 	       		$id=substr($ids, 0,strlen($ids)-1);
 	       		$ini['task_id']=array("in",$id);
-	       		$n=$itemObj->where($ini)->delete();
+	       		$ini['flag']=0;
+	       		$n=$itemObj->save($ini);
 	       		if($n)
 	       		{
-	       			$arr['msg']="删除成功";
+	       			$arr['info']="删除成功";
 	       		}else {
-	       			$arr['msg']="删除失败";
+	       			$arr['info']="删除失败";
 	       		}
 	       		echo json_encode($arr);
 	       	}
@@ -481,7 +492,7 @@ class ProjectController extends Controller
 	      public function task_process()
 	      {
 	      	    //实例化对象
-	      	    $task=M("task"); 
+	      	    $task=D("task"); 
 	      	    $id=I("get.id");
 	      	    $ini['task_id']=$id;
 	      	    $arr=$task->where($ini)->find();
@@ -495,7 +506,7 @@ class ProjectController extends Controller
 	       */
 	      public function process_list()
 	      {
-	      	   $task=M("task");
+	      	   $task=D("task");
 	      	   //当前的页数
 	      	   $p=isset($_GET['p'])?$_GET['p']:1;
 	      	   $this->assign("p",$p);
@@ -532,7 +543,7 @@ class ProjectController extends Controller
 	      public function process_edit()
 	      {
 	      	//实例化对象
-	      	$taskObj=M("task");
+	      	$taskObj=D("task");
 	      	if(IS_POST)
 	      	{
 		      		$m=$taskObj->create();
@@ -569,7 +580,7 @@ class ProjectController extends Controller
 	       */
 	      public function process_delone()
 	      {
-		      	$taskObj=M("task");
+		      	$taskObj=D("task");
 		      	//接受动作标识
 		      	$act=isset($_POST['act'])?$_POST['act']:'';
 		      	if($act=="del")
@@ -580,9 +591,9 @@ class ProjectController extends Controller
 		      		$n=$taskObj->save($ini);
 		      		if($n)
 		      		{
-		      			$arr['msg']="删除成功";
+		      			$arr['info']="删除成功";
 		      		}else{
-		      			$arr['msg']="删除失败";
+		      			$arr['info']="删除失败";
 		      		}
 		      		echo json_encode($arr);
 		      	}
@@ -595,7 +606,7 @@ class ProjectController extends Controller
 	      public function process_delall()
 	      {
 			      	//实例化对象
-			      	$taskObj=M("task");
+			      	$taskObj=D("task");
 			      	//接收动作标识
 			      	$act=isset($_POST['act'])?$_POST['act']:'';
 			      	if($act=="delall")
@@ -607,16 +618,15 @@ class ProjectController extends Controller
 			      		$n=$taskObj->save($ini);
 			      		if($n)
 			      		{
-			      			$arr['msg']="删除成功";
+			      			$arr['info']="删除成功";
 			      		}else {
-			      			$arr['msg']="删除失败";
+			      			$arr['info']="删除失败";
 			      		}
 			      		echo json_encode($arr);
 			      	}
 			      	
 			      	exit();
 	      }
-	      
 	      
 	      
 	      

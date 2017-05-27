@@ -104,7 +104,7 @@
    	   if(confirm('确定删除吗？'))
    	   {
    		      $.post("<?php echo U('Develop/task_delone');?>",{"act":"del","ids":ids},function(d){
-   		    	  alert(d.msg);
+   		    	  alert(d.info);
    		    	  location.href="<?php echo U('Home/Develop/task_list/p/"+curp+"');?>";
    		      },"json");
    	   }
@@ -128,7 +128,7 @@
    		  }
    	 });   
    	 $.post("<?php echo U('Develop/task_delall');?>",{"act":"delall","idstr":idstr},function(d){
-   		 alert(d.msg);
+   		 alert(d.info);
    		 location.href="<?php echo U('Develop/task_list');?>";
    	 },"json");
     }

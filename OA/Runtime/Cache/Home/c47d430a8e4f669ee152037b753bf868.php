@@ -123,13 +123,13 @@
                             <td align=middle width=30><img height=9 
                                                            src="/Company_crm/Public/img/menu_icon.gif" width=9></td>
                             <td><a class=menuchild 
-                                   href="<?php echo U('Home/Major/major_add');?>" 
+                                   href="<?php echo U('Home/Public/kuozhan');?>" 
                                    target='right'>工单提醒</a></td></tr>
                         <tr height=20>
                             <td align=middle width=30><img height=9 
                                                            src="/Company_crm/Public/img/menu_icon.gif" width=9></td>
                             <td><a class=menuchild 
-                                   href="<?php echo U('Home/Major/major_pvs');?>" 
+                                   href="<?php echo U('Home/Public/kuozhan');?>" 
                                    target='right'>任务提醒</a></td></tr>
                                
                         <tr height=4>
@@ -160,7 +160,7 @@
                             <td align=middle width=30><img height=9 
                                                            src="/Company_crm/Public/img/menu_icon.gif" width=9></td>
                             <td><a class=menuchild 
-                                   href="<?php echo U('Home/Banji/banji_add');?>" 
+                                   href="<?php echo U('Home/Public/kuozhan');?>" 
                                    target='right'>任务提醒</a></td></tr>      
                         <tr height=4>
                             <td colspan=2></td></tr></table>
@@ -191,13 +191,13 @@
                             <td align=middle width=30><img height=9 
                                                            src="/Company_crm/Public/img/menu_icon.gif" width=9></td>
                             <td><a class=menuchild 
-                                   href="<?php echo U('Home/Result/result_add');?>" 
+                                   href="<?php echo U('Home/Public/kuozhan');?>" 
                                    target='right'>工单提醒</a></td></tr>
                         <tr height=20>
                             <td align=middle width=30><img height=9 
                                                            src="/Company_crm/Public/img/menu_icon.gif" width=9></td>
                             <td><a class=menuchild 
-                                   href="<?php echo U('Home/Result/result_show');?>" 
+                                   href="<?php echo U('Home/Public/kuozhan');?>" 
                                    target='right'>进度查看</a></td></tr>
                         
                       </table>    

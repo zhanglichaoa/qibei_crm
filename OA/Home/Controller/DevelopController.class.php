@@ -1,7 +1,8 @@
 <?php
 namespace  Home\Controller;
-use Think\Controller;
-class DevelopController extends Controller
+//use Think\Controller;
+use Home\Controller\CommonController;
+class DevelopController extends CommonController
 {
 	     /*
 	      * 任务管理列表页
@@ -9,7 +10,7 @@ class DevelopController extends Controller
 	      public function task_list()
 	      {
 			      	//实例化对象
-			      	$taskObj=M('task');
+			      	$taskObj=D('task');
 			      	//当前的页数
 			      	$p=isset($_GET['p'])?$_GET['p']:1;
 			      	$this->assign("p",$p);
@@ -54,11 +55,16 @@ class DevelopController extends Controller
 	      public  function   task_add()
 	      {
 				      	//实例化对象
-				      	$taskObj=M("task");
-				      	$name=M("itemgroup");
+				      	$taskObj=D("task");
+				      	$name=D("itemgroup");
 				      	if(IS_POST)
 				      	{
 				      		$m=$taskObj->create();
+				      		$task['task_name']=$m['task_name'];
+				      		$taskArr=$taskObj->where($task)->find();
+				      		if(!empty($taskArr)){
+				      			  $this->error("该任务已经存在");
+				      		}
 				      		if($m)
 				      		{
 				      			$n=$taskObj->add();
@@ -86,7 +92,7 @@ class DevelopController extends Controller
 	       public function  task_edit()
 	       {
 			       	//实例化对象
-			       	$taskObj=M("task");
+			       	$taskObj=D("task");
 			       	//接受id和当前的页数
 			       	$id=I("get.id");
 			       	$p=I("get.p");
@@ -116,7 +122,7 @@ class DevelopController extends Controller
 			       	$ini['task_id']=$id;
 			       	$arr=$taskObj->where($ini)->join("crm_itemgroup as i on t.fzr_id=i.item_id","left")->field("t.*,i.item_fzr")->alias("t")->find();
 			       	//跟配给
-			       	$itarr=M("itemgroup");
+			       	$itarr=D("itemgroup");
 			       	$arr2=$itarr->select();
 			       	$this->assign("arrit",$arr2);
 			       	 
@@ -130,7 +136,7 @@ class DevelopController extends Controller
 	    */   
 	      public function task_delone()
 	      {
-			      	$taskObj=M("task");
+			      	$taskObj=D("task");
 			      	//接受动作标识
 			      	$act=isset($_POST['act'])?$_POST['act']:'';
 			      	if($act=="del")
@@ -140,9 +146,9 @@ class DevelopController extends Controller
 			      		$n=$taskObj->save($ini);
 			      		if($n)
 			      		{
-			      			$arr['msg']="删除成功";
+			      			$arr['info']="删除成功";
 			      		}else{
-			      			$arr['msg']="删除失败";
+			      			$arr['info']="删除失败";
 			      		}
 			      		echo json_encode($arr);
 			      	}
@@ -156,7 +162,7 @@ class DevelopController extends Controller
 	      public function task_delall()
 	      {
 		      	//实例化对象
-		      	$taskObj=M("task");
+		      	$taskObj=D("task");
 		      	//接收动作标识
 		      	$act=isset($_POST['act'])?$_POST['act']:'';
 		      	if($act=="delall")
@@ -168,9 +174,9 @@ class DevelopController extends Controller
 		      		$n=$taskObj->save($ini);
 		      		if($n)
 		      		{
-		      			$arr['msg']="删除成功";
+		      			$arr['info']="删除成功";
 		      		}else {
-		      			$arr['msg']="删除失败";
+		      			$arr['info']="删除失败";
 		      		}
 		      		echo json_encode($arr);
 		      	}
@@ -185,7 +191,7 @@ class DevelopController extends Controller
 	      public function task_process()
 	      {
 			      	//实例化对象
-			      	$task=M("task");
+			      	$task=D("task");
 			      	$id=I("get.id");
 			      	$ini['task_id']=$id;
 			      	$arr=$task->where($ini)->find();
@@ -201,7 +207,7 @@ class DevelopController extends Controller
 	       */
 	      public function process_list()
 	      {
-		      	$task=M("task");
+		      	$task=D("task");
 		      	//当前的页数
 		      	$p=isset($_GET['p'])?$_GET['p']:1;
 		      	$this->assign("p",$p);
@@ -241,7 +247,7 @@ class DevelopController extends Controller
 	      public function process_edit()
 	      {
 			      	//实例化对象
-			      	$taskObj=M("task");
+			      	$taskObj=D("task");
 			      	if(IS_POST)
 			      	{
 			      		$m=$taskObj->create();
@@ -279,7 +285,7 @@ class DevelopController extends Controller
 	       */
 	        public function process_delone()
 	        {
-	        	$taskObj=M("task");
+	        	$taskObj=D("task");
 	        	//接受动作标识
 	        	$act=isset($_POST['act'])?$_POST['act']:'';
 	        	if($act=="del")
@@ -289,9 +295,9 @@ class DevelopController extends Controller
 	        		$n=$taskObj->save($ini);
 	        		if($n)
 	        		{
-	        			$arr['msg']="删除成功";
+	        			$arr['info']="删除成功";
 	        		}else{
-	        			$arr['msg']="删除失败";
+	        			$arr['info']="删除失败";
 	        		}
 	        		echo json_encode($arr);
 	        	}
@@ -304,7 +310,7 @@ class DevelopController extends Controller
 	      public function process_delall()
 	      {
 		      	//实例化对象
-		      	$taskObj=M("task");
+		      	$taskObj=D("task");
 		      	//接收动作标识
 		      	$act=isset($_POST['act'])?$_POST['act']:'';
 		      	if($act=="delall")
@@ -316,9 +322,9 @@ class DevelopController extends Controller
 		      		$n=$taskObj->save($ini);
 		      		if($n)
 		      		{
-		      			$arr['msg']="删除成功";
+		      			$arr['info']="删除成功";
 		      		}else {
-		      			$arr['msg']="删除失败";
+		      			$arr['info']="删除失败";
 		      		}
 		      		echo json_encode($arr);
 		      	}

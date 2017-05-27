@@ -40,11 +40,11 @@
        <div class="list_box">
            <div class="header">
                <span class="one">当前位置是:系统管理员>>角色管理列表</span>
-               <span class="two"><a href="__CONTROLLER__/role_add">【添加角色】</a></span>
+               <span class="two"><a href="__CONTROLLER__/role_add">【添加角色组】</a></span>
            </div>
            <div class="main">
             <form action="__ACTION__" method="get" class="form">
-                   角色名称： <input type="text" name="juese" value="<{$title}>"  />&nbsp;
+                   角色组名称： <input type="text" name="juese" value="<{$title}>"  />&nbsp;
                    <input type="submit" value="查询" />
                </form>
            </div>
@@ -52,16 +52,18 @@
                <table class="table_1" border="1" cellspacing="0" bordercolor="#CCCCCC">
                     <tbody><tr style="font-weight: bold;" class="character">
                         <td>序号</td>
-                        <td>角色名称</td>                                                                                           
+                        <td>角色组名称</td>  
+                        <td>权限名称</td>                                                                                           
                         <td align="center">操作</td>
                     </tr>
                  <volist name="rolearr"  id="vv">
                     <tr id="product1">
-                        <td><input type="checkbox" class="curid" name="ids[]" value="<{$vv['role_id']}>"><{$vv['role_id']}></td>                                                                                  
-                        <td><{$vv['role_name']}></td>                                             
-                        <td>
-	                        <a href="__CONTROLLER__/role_edit/p/<{$pno}>/id/<{$vv['role_id']}>">修改 </a>                  
-	                        <a href="javascript:delone(<{$vv['role_id']}>,<{$pno}>);">删除</a><br>
+                        <td style="width:100px;"><input type="checkbox" class="curid" name="ids[]" value="<{$vv['id']}>"><{$vv['id']}></td>                                                                                  
+                        <td style="width:100px;"><{$vv['title']}></td>
+                        <td><{$vv['rules']}></td>                                            
+                        <td style="width:100px;">
+	                        <a href="__CONTROLLER__/role_edit/p/<{$pno}>/id/<{$vv['id']}>">修改 </a>                  
+	                        <a href="javascript:delone(<{$vv['id']}>,<{$pno}>);">删除</a><br>
                        </td>
                     </tr>
                </volist>
@@ -108,8 +110,8 @@
     		  {
     			  idstr=idstr+o.value+",";
     		  }
-    	 });   
-    	 $.post("<{:U('Administrator/delall')}>",{"act":"delall","idstr":idstr},function(d){
+    	 }); 
+    	 $.post("<{:U('Home/Administrator/role_delall')}>",{"act":"delall","idstr":idstr},function(d){
     		 alert(d.msg);
     		 location.href="<{:U('Administrator/role_list')}>";
     	 },"json");

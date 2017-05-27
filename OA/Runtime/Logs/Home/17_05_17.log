@@ -185,3 +185,6 @@ ERR: 无法加载控制器:Major
 [ 2017-05-17T16:42:05+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Client/shouhou_list.html
 ERR: 非法操作:shouhou_list
 
+[ 2017-05-17T18:10:35+08:00 ] 127.0.0.1 /Company_crm/index.php/Home/Client/shouhou_list.html
+ERR: 非法操作:shouhou_list
+

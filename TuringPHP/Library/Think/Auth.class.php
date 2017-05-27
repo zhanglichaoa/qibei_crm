@@ -79,7 +79,7 @@ class Auth{
     );
 
     public function __construct() {
-        $prefix = C('DB_PREFIX');
+        $prefix = C('DB_PREFIX');//获取表前缀
         $this->_config['AUTH_GROUP'] = $prefix.$this->_config['AUTH_GROUP'];
         $this->_config['AUTH_RULE'] = $prefix.$this->_config['AUTH_RULE'];
         $this->_config['AUTH_USER'] = $prefix.$this->_config['AUTH_USER'];

@@ -7,7 +7,7 @@
 <script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
 <script>
 $(document).ready(function() {
-	var nowtime=6;
+	var nowtime=3;
 	function hi() {
 		if (nowtime==0) {
 			window.history.go(-1);
@@ -22,7 +22,7 @@ $(document).ready(function() {
 </head>
 <body>
 <div id="error">
-	<div class="img"><img src="__IMAGE__/error.jpg" border="0" /></div>
+	<div class="img"><img src="__PUBLIC__/images/error.jpg" border="0" /></div>
     <div class="font">
     	<{$content}><br />
     	<span class="history"></span>&nbsp;秒后自动返回或点击：<a href="javascript:window.history.go(-1);">上一页</a> 手动返回

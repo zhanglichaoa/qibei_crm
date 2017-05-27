@@ -1,167 +1,171 @@
 <?php
 namespace  Home\Controller;
-use Think\Controller;
-//use Home\Controller\CommonController;
-class AuthController extends Controller{
+//use Think\Controller;
+use Home\Controller\CommonController;
+class AuthController extends CommonController{
 	  /*
 	   * 权限的列表页面
 	   */
-	 public function  auth_list()
+	  public function auth_list()
+	  {
+	  	   //实例化权限表
+	  	   $authrule=D("AuthRule");
+	  	   //$ini['status']=1;
+	  	   $ini=array();
+	  	   $ini['flags']=1;
+	  	   //当前的页数
+	  	   $p=isset($_GET["p"])?$_GET['p']:1;
+	  	   $this->assign("p",$p);
+	  	   //查询的操作
+	  	   if(IS_GET)
+	  	   {
+	  	   	     $title=I("get.quanxian");
+	  	   	     if(!empty($title))
+	  	   	     {
+	  	   	     	      $ini['title']=array("like","%{$title}%");
+	  	   	     }
+	  	   	     $this->assign("title",$title);
+	  	   }
+	  	   //查询总数
+	  	   $count = $authrule->where($ini)->count();
+	  	   $Page=new \Think\Page($count,8);
+       	   //***** 分页样式定制
+           $Page->setConfig('header', '<li class="rows">共<b>%TOTAL_ROW%</b>条记录&nbsp;第<b>%NOW_PAGE%</b>页/共<b>%TOTAL_PAGE%</b>页</li>');
+           $Page->setConfig('prev', '上一页');
+           $Page->setConfig('next', '下一页');
+           $Page->setConfig('first', '首页');
+           $Page->setConfig('end', '末页');
+           //***** 这里定义分页的各个单元的显示位置
+           $Page->setConfig('theme', '%FIRST%%UP_PAGE%%LINK_PAGE%%DOWN_PAGE%%END%%HEADER%');		
+		   $show=$Page->show();
+	  	   //内容的查询
+	  	   $content=$authrule->where($ini)->order("id asc")->limit($Page->firstRow.",".$Page->listRows)->select();
+	  	   $this->assign("autharr",$content);
+	  	   $this->assign("pagearr",$show);
+	  	   $this->display();
+	  }
+	  /**
+	   * 添加权限
+	   */
+	 public function auth_add()
 	 {
-	 	  //实例化对象
-	 	  $compentence=M("competence");
-	 	  //获取当前的页面:
-	 	  $p=isset($_GET['p'])?$_GET['p']:1;
-	 	  $this->assign("p",$p);
-	 	  $ini=array();
-	 	   //多条件查询的操作
-	 	  $keyword = I('get.keyword');
-	 	  if($keyword!="")
-	 	  {
-	 	  	 //$ini['sid&cname']=array('0',array('LIKE',"%$keyword%"),'_multi'=>true);		//多条件查询
-	 	  	  $ini['cname']=array("like","%$keyword%");
+	 	  header("Content-Type:text/html; charset=UTF-8"); 	  
+	 	  if (IS_POST) {
+	 	  	$authrule = D("AuthRule");
+	 	  	$authruleArr = $authrule->create();
+	 	  	if ($authruleArr) {
+	 	  		//汉字转拼音
+	 	  		$authruleArr['flag'] = Pinyin($authruleArr['flagname']);
+	 	  		$rtn = $authrule->add($authruleArr);
+	 	  		if ($rtn) {
+	 	  			$this->success("添加成功",U("Home/Auth/auth_add"));
+	 	  		}else{
+	 	  			$this->error("添加失败");
+	 	  		}
+	 	  	}else{
+	 	  		$this->error("数据创建失败---".$authrule->getError());
+	 	  	}
+	 	  	exit();
 	 	  }
-	 	  $this->assign("keyword",$keyword);
-	 	  //翻页的操作
-	 	  $count=$compentence->where($ini)->count();
-	 	  $Page=new \Think\Page($count,1000000);
-	 	  //***** 分页样式定制
-       $Page->setConfig('header', '<li class="rows">共<b>%TOTAL_ROW%</b>条记录&nbsp;第<b>%NOW_PAGE%</b>页/共<b>%TOTAL_PAGE%</b>页</li>');
-       $Page->setConfig('prev', '上一页');
-       $Page->setConfig('next', '下一页');
-       $Page->setConfig('first', '首页');
-       $Page->setConfig('end', '末页');
-       //***** 这里定义分页的各个单元的显示位置
-       $Page->setConfig('theme', '%FIRST%%UP_PAGE%%LINK_PAGE%%DOWN_PAGE%%END%%HEADER%');
-		
-		$show=$Page->show();
+	 	  //分组标识
+	 	  $groupObj=D("AuthGroup");
 	 	  //内容的查询
-	 	  $ini['sid']=0;
-	 	  $arrObj=$compentence->where($ini)->order('id')->limit($Page->firstRow.','.$Page->listRows)->select();
-	 	 
-	 	  $sidlist=$compentence->where('sid<>0')->order('dtime')->select();
-	 
-	 	  $this->assign("sidlist",$sidlist);
-	 	  $this->assign("volist",$arrObj);
-	 	  $this->assign("pagearr",$show);
-
+	 	  $content=$groupObj->select();
+	 	  $this->assign("volist",$content);
+	 	  $this->display();
+	 }
+	 /**
+	  * 修改权限
+	  */
+	 public function auth_edit()
+	 {
+	 	if(IS_POST)
+	 	{
+	 		$authRule=D("AuthRule");
+	 		$m=$authRule->create();
+	 		if($m)
+	 		{
+	 			$m['flag']=Pinyin($m['flagname']);
+	 			$n=$authRule->save($m);
+	 			if($n)
+	 			{
+	 				$this->success("修改成功",U("Home/Auth/auth_edit"));
+	 			}
+	 			else {
+	 				$this->error("修改失败");
+	 			}
+	 		}else {
+	 			$this->error("数据创建失败".$authRule->getError());
+	 		}
+	 		exit();
+	 	}
+	 	  //接受传递过来的id
+	 	  $ini['id']=I("get.id");
+	 	  $ruleArr=D("AuthRule");
+	 	  $rulearr=$ruleArr->where($ini)->find();
+	 	  $this->assign("result",$rulearr);
+	 	  //分组标识
+	 	  $groupObj=D("AuthGroup");
+	 	  //内容的查询
+	 	  $content=$groupObj->select();
+	 	  $this->assign("volist",$content);	 	 	 
 	 	  $this->display();
 	 	
 	 }
 	 /*
-	  * 添加权限的操作1
+	  * 权限单删的操作
 	  */
-	  public function cadd()
-	  {
-	  	  //先不考虑用户权限的验证
-	  	  
-	  	  //实例化对象
-	  	  $co=M('competence');
-	  	  $volist=$co->where('sid=0 AND status=0')->order('dtime')->getField('id,cname,status');
-	  	  $this->volist=$volist;
-	  	  $this->display('add');
-	  	   
-	  }
-	  //新增权限2
-	  public function cadd_do() {
-	     	//验证用户权限
-	  
-	  	    //实例化对象
-	  	    $comObj=M("Competence");
-	        $act=isset($_POST['act'])?$_POST['act']:'';
-	        if($act=="adds")
-	        {
-	        	$datas['sid'] = I('post.sid','');
-	        	$datas['cname'] = I('post.cname');
-	        	$datas['description'] = I('post.description');
-	        	$datas['status'] = I('post.status');
-	            $datas['dtime']=date("Y-m-d H:i:s",time());
-	        	$n=$comObj->add($datas);
-	        	if($n)
-	        	{
-	        		 $msgarr=array("msg"=>"添加成功");
-	        	}
-	        	else {
-	        		 $msgarr=array("msg"=>"添加失败");
-	        	}
-	            echo json_encode($msgarr);
-	            exit();
-	        } 	        
-	   }
-	/*
-	 * 修改权限1
-	 */ 
-	      public function cedit()
-	      {
-	      	  //接收传过来的id
-		      	$id = I('get.id','');
-		      	if ($id=='' || !is_numeric($id)) {
-		      		$this->content='参数ID类型错误，请关闭本窗口';
-		      		exit($this->display('Public:err'));
-		      	}
-		      	$id=intval($id);
-		      	//实例化对象
-		      	$co=M('competence');
-		      	$volist=$co->where('sid=0 AND status=0')->order('dtime')->getField('id,cname,status');
-		      	$data=array('id' => $id);
-		      	$result=$co->where($data)->find();
-		      	$this->assign("volist",$volist);
-		      	$this->assign("result",$result);
-		      	
-		      	$this->display("edit");
-	      }
-	 /*
-	  * 修改权限2
-	  */
-	  public function cedit_do()
-	  {
-		  	//验证用户权限
-		  	 
-		  	//实例化对象
-		  	$comObj=M("Competence");
-		  	$act=isset($_POST['act'])?$_POST['act']:'';
-		  	if($act=="saves")
-		  	{
-		  		$datas['id']=I("post.id");
-		  		$datas['sid'] = I('post.sid','');
-		  		$datas['cname'] = I('post.cname');
-		  		$datas['description'] = I('post.description');
-		  		$datas['status'] = I('post.status');
-		  		$datas['dtime']=date("Y-m-d H:i:s",time());
-		  		$n=$comObj->save($datas);
-		  		if($n)
-		  		{
-		  			$msgarr=array("msg"=>"修改成功");
-		  		}
-		  		else {
-		  			$msgarr=array("msg"=>"修改失败");
-		  		}
-		  		echo json_encode($msgarr);
-		  		exit();
-	  	}
-	  }
-	 /*
-	  * 删除权限
-	  */
-	 public function cdel(){
-	 	      //实例化对象
-	 	      $comObj=M("competence");
-	 	      //接收动作标识
-	 	      $act=isset($_POST['act'])?$_POST['act']:'';
-	 	      if($act=="del")
-	 	      {
-	 	      	    //接收id
-	 	      	    $id=I("post.id");
-	 	      	    $ini['id']=$id;
-	 	      	    $n=$comObj->where($ini)->delete();
-	 	      	    if($n)
-	 	      	    {
-	 	      	          $msgarr['msg']="删除成功";	
-	 	      	    }else {
-	 	      	    	  $msgarr['msg']="删除失败";
-	 	      	    }
-	 	      	    echo json_encode($msgarr);
-	 	      }
-	 	      exit();
+	 public function auth_delone()
+	 {
+	 	   $act=I("post.act");
+	 	   if($act=="del")
+	 	   {
+	 	   	      $id=I("post.ids");
+	 	   	      //实例化对象
+	 	   	      $rulearr=D("AuthRule");
+	 	   	      $ini['id']=$id;
+	 	   	      $ini['flags']=0;
+	 	   	      $m=$rulearr->save($ini);
+	 	   	      if($m)
+	 	   	      {
+	 	   	      	   $arr['msg']="删除成功";
+	 	   	      }else{
+	 	   	      	   $arr['msg']="删除失败";
+	 	   	      }
+	 	   	      echo json_encode($arr);
+	 	   }
+	 	   exit();
+	 	
 	 }
+	 /**
+	  * 权限多删的操作
+	  */
+	 public function auth_delall()
+	 {
+	 	  $authRole=D("AuthRule");
+	 	  $act=I("post.act");
+	 	  if($act=="delall")
+	 	  {
+	 	  	     //接收id
+	 	  	     $idstr=I("post.idstr");
+	 	  	     $ids=substr($idstr, 0,strlen($idstr)-1);
+	 	  	     $ini['id']=array("in",$ids);
+	 	  	     $ini['flags']=0;
+	 	  	     $marr=$authRole->save($ini);
+	 	  	     if($marr)
+	 	  	     {
+	 	  	     	    $arr['msg']="删除成功";
+	 	  	     }else {
+	 	  	     	    $arr['msg']="删除失败";
+	 	  	     }
+	 	  	     echo json_encode($arr);
+	 	  }
+	 	  exit();
+	 }
+	 
+	 
+	 
+	 
+	 
+	 
 }

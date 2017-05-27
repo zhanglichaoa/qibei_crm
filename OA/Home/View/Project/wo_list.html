@@ -55,7 +55,6 @@
                         <td>序号</td>
                         <td>工单名称</td>                                                                                    
                         <td>工单内容</td>
-                       <!--   <td>工单客户</td>   -->
                         <td>工单开始时间</td>
                         <td>工单的状态</td> 
                         <td>工单的优先级</td>                                                                   
@@ -65,8 +64,7 @@
                     <tr id="product1">
                         <td><{$vv['id']}><input type="checkbox"  class="curid" name="ids[]" value="<{$vv['id']}>"></td>
                         <td><{$vv['title']}></td>                     
-                        <td><{$vv['content']}></td>           
-                        <!--<td><{$vv['kehu_name']}></td> -->                          
+                        <td><{$vv['content']}></td>                      
                         <td><{$vv['ctime']}></td>
                         <td>
                                  <if condition="$vv['status'] eq 1">
@@ -117,7 +115,7 @@
    	   if(confirm('确定删除吗？'))
    	   {
    		      $.post("<{:U('Project/wo_delone')}>",{"act":"del","ids":ids},function(d){
-   		    	  alert(d.msg);
+   		    	  alert(d.info);
    		    	  location.href="<{:U('Home/Project/wo_list/p/"+curp+"')}>";
    		      },"json");
    	   }
@@ -141,7 +139,7 @@
    		  }
    	 });   
    	 $.post("<{:U('Project/wo_delall')}>",{"act":"delall","idstr":idstr},function(d){
-   		 alert(d.msg);
+   		 alert(d.info);
    		 location.href="<{:U('Project/wo_list')}>";
    	 },"json");
     }

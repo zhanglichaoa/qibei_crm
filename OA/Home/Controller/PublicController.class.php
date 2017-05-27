@@ -1,8 +1,8 @@
 <?php
 namespace Home\Controller;
-use Think\Controller;
-//use Home\Controller\CommonController;
-class PublicController extends Controller {
+//use Think\Controller;
+use Home\Controller\CommonController;
+class PublicController extends CommonController{
 	public function header() {
 		//获取session值
 		$name=session("UNAME");
@@ -26,4 +26,9 @@ class PublicController extends Controller {
 		$this->assign("arr",$arr);
 		$this->display();
 	}
+	public function kuozhan()
+	{
+		  $this->display();
+	}
+	
 }

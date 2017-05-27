@@ -63,7 +63,7 @@
 			</tr>
         </table>		
 <div style="text-align:center;">
-<p>来源：<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
+<p>来源：<a href="http://www.qibeiwang.com/" target="_blank">七贝移动数字产品研发中心</a></p>
 </div>
     </body>
 </html>

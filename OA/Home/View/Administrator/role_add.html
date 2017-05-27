@@ -1,47 +1,62 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     <head>
-        <title>添加角色</title>
+        <title>添加权限组</title>
         <meta http-equiv="content-type" content="text/html;charset=utf-8">
-        <link href="__PUBLIC__/css/mine.css" type="text/css" rel="stylesheet">
+        <link href="__PUBLIC__/css/mine.css" type="text/css" rel="stylesheet" />
+        <script src="__PUBLIC__/js/jquery-1.12.4.js"></script>
     </head>
 
      <body>
        <div class="list_box">
            <div class="header">
-               <span class="one">当前位置是：角色管理-》添加角色信息</span>
+               <span class="one">当前位置是:权限管理>>添加权限组</span>
                <span class="two"><a href="<{:U('Home/Administrator/role_list')}>">【返回】</a></span>
            </div>
+          
            <div class="bottom">
-           <form action="__ACTION__" method="post" enctype="multipart/form-data">
+           <form method="post" action="__ACTION__"  onsubmit="return checktitle();">
                <table class="table_2" border="1" cellspacing="0" bordercolor="#CCCCCC">
-                     <tr>
-                    <td>角色名称</td>
-                    <td><input type="text" name="role_name" /></td>
-                </tr>
                 <tr>
-                    <td>是否启用</td>
+                    <td class="left_td" style="width:100px;">角色组名</td>
                     <td>
-                        <select name='status'>
-                          <option value='1'>启用</option>
-                          <option value='0'>禁止</option>
-                        </select>
+                        <input type="text" value=""   name="title"  id="title">
                     </td>
                 </tr>
+                <volist name="arr" id="v">
+               	<assign name="pkey" value="$key" />
                 <tr>
-                    <td colspan="2" align="center">
-                        <input type="submit" value="添加">
-                        <input type="button" onclick="re();" value="返回">
+                    <td class="left_td" ><input value="<{$valarr[$key]}>" type="checkbox" onclick="sel(this);"><{$key}></td>
+                    <td>
+                    <volist name="v" id="x">
+                        <input type="checkbox" class="val<{$valarr[$pkey]}>" value="<{$x['id']}>" name="rules[]"><{$x['title']}>&nbsp;
+                    </volist>
                     </td>
-                </tr>    
+                </tr>
+                </volist> 
+                <tr>
+                    <td colspan="2" align="center" height="50">
+                        <input type="submit" value="添加">
+                    </td>
+                </tr>  
                </table>
                </form>
            </div>
        </div>
     </body>
-<script>
-    function re(){
-    	location.href="javascript:history.go(-1)";//返回上一页
-    }
-</script>
+    <script>
+    	function sel(obj){
+    		var val=obj.value;
+    		$(".val"+val).each(function(i,o){
+    			o.checked=obj.checked;
+    		})
+    	}
+    	function checktitle(){
+    		 var title=$("#title").val();
+    		 if(title==""){
+    			   alert("角色组名不能为空");
+    			   return false;
+    		 }
+    	}
+    </script>
 </html>

@@ -42,7 +42,7 @@
 						</ul>
 						<ul>
 						<li class="user_main_input">
-						    <img src="<{:U('Home/Login/yzm')}>" style="margin-left:60px; width:100px;" id="img">
+						    <img src="<{:U('Home/Login/yzm')}>" style="margin-left:60px; width:160px;" id="img">
 						</li>						    
 						</ul>
 					</div>
@@ -72,7 +72,7 @@ $(function(){
 	})	
 })
 //检查函数
-function checkSel(){
+function checkSels(){
 	var name = $("#TxtUserName").val();
 	var pass = $("#TxtPassword").val();
 	var code = $("#TxtUserCode").val();
@@ -91,19 +91,6 @@ function checkSel(){
 		$("#TxtUserCode").focus();
 		return false;
 	}
-	/*
-	var reg1 = /(^[A-Za-z0-9]{6,16}$)|(^[\u4E00-\u9FA5]{2,8}$)/;//必须以字母开头长度在5-12个字符
-	if(!reg1.test(name)){
-		alert("用户名格式不正确");
-		$("#TxtUserName").select();
-		return false;
-	}
-	var reg2 = /^[!@#$%^&*()_+`\-=:';"<>,.\/\w]{1,12}$/;//允许特殊符号长度在1-12个字符
-	if(!reg2.test(pass)){
-		alert("密码格式不正确");
-		$("#TxtPassword").select();
-		return false;
-	}*/
 	return true;
 }
 
